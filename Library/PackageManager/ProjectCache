@@ -5,21 +5,66 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637577208019810279
-    m_Hash: 789403595
+      ticks: 637577264738976753
+    m_Hash: 2053638769
   m_LockFileStatus:
     m_FilePath: C:/Users/theli/Documents/GitHub/Horror-Multiplayer/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637577208023969020
-    m_Hash: 2452786791
+      ticks: 637577264739390439
+    m_Hash: 1015741363
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
   m_Packages:
     m_ResolvedPackages:
+    - packageId: com.mlapi.contrib.transport.steamp2p@https://github.com/Unity-Technologies/mlapi-community-contributions.git?path=/Transports/com.mlapi.contrib.transport.steamp2p
+      testable: 0
+      isDirectDependency: 1
+      version: 1.0.0
+      source: 5
+      resolvedPath: C:\Users\theli\Documents\GitHub\Horror-Multiplayer\Library\PackageCache\com.mlapi.contrib.transport.steamp2p@a03cb4065f
+      assetPath: Packages/com.mlapi.contrib.transport.steamp2p
+      name: com.mlapi.contrib.transport.steamp2p
+      displayName: SteamP2P Transport for MLAPI
+      author:
+        name: 
+        email: 
+        url: 
+      category: 
+      type: 
+      description: SteamP2P Transport for MLAPI
+      status: 4
+      errors: []
+      versions:
+        all: []
+        compatible: []
+        verified: 
+      dependencies: []
+      resolvedDependencies: []
+      keywords: []
+      registry:
+        id: 
+        name: 
+        url: 
+        scopes: []
+        isDefault: 0
+        capabilities: 0
+      hasRegistry: 0
+      hideInEditor: 1
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 0
+      documentationUrl: 
+      hasRepository: 0
+      repository:
+        type: 
+        url: 
+        revision: 
+        path: 
     - packageId: com.unity.collab-proxy@1.5.7
       testable: 0
       isDirectDependency: 1
@@ -380,6 +425,59 @@ m_PackageAssets:
         type: git
         url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.vscode.git
         revision: b5ec9b38109e52b1b26597d521e4df75e042ebb9
+        path: 
+    - packageId: com.unity.multiplayer.mlapi@0.1.0
+      testable: 0
+      isDirectDependency: 1
+      version: 0.1.0
+      source: 1
+      resolvedPath: C:\Users\theli\Documents\GitHub\Horror-Multiplayer\Library\PackageCache\com.unity.multiplayer.mlapi@0.1.0
+      assetPath: Packages/com.unity.multiplayer.mlapi
+      name: com.unity.multiplayer.mlapi
+      displayName: MLAPI Networking Library
+      author:
+        name: 
+        email: 
+        url: 
+      category: 
+      type: 
+      description: This the Core Unity Mid-level API that provides core SDK for multiplayer
+        games within unity
+      status: 4
+      errors: []
+      versions:
+        all:
+        - 0.1.0
+        compatible:
+        - 0.1.0
+        verified: 
+      dependencies:
+      - name: com.unity.nuget.mono-cecil
+        version: 1.10.1-preview.1
+      resolvedDependencies:
+      - name: com.unity.nuget.mono-cecil
+        version: 1.10.1-preview.1
+      keywords:
+      - unity
+      registry:
+        id: main
+        name: 
+        url: https://packages.unity.com
+        scopes: []
+        isDefault: 1
+        capabilities: 7
+      hasRegistry: 1
+      hideInEditor: 0
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 637564369660000000
+      documentationUrl: 
+      hasRepository: 1
+      repository:
+        type: git
+        url: git+https://github.com/Unity-Technologies/com.unity.multiplayer.mlapi.git
+        revision: db4f940e2cd4388b0db8af12d5d1f5f8b9ba0413
         path: 
     - packageId: com.unity.test-framework@1.1.26
       testable: 0
@@ -2638,6 +2736,69 @@ m_PackageAssets:
         url: https://github.cds.internal.unity3d.com/unity/com.unity.ext.nunit.git
         revision: 29ea4d6504a5f58fb3a6934db839aa80ae6d9d88
         path: 
+    - packageId: com.unity.nuget.mono-cecil@1.10.1-preview.1
+      testable: 0
+      isDirectDependency: 0
+      version: 1.10.1-preview.1
+      source: 1
+      resolvedPath: C:\Users\theli\Documents\GitHub\Horror-Multiplayer\Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1-preview.1
+      assetPath: Packages/com.unity.nuget.mono-cecil
+      name: com.unity.nuget.mono-cecil
+      displayName: Mono Cecil
+      author:
+        name: 
+        email: 
+        url: 
+      category: 
+      type: 
+      description: 'The mono cecil library from https://www.nuget.org/packages/Mono.Cecil/
+
+
+        This
+        package is intended for internal Unity use only. Most Unity users will be
+        better suite using the existing community tooling.
+
+        To avoid assembly
+        clashes, please use this package if you intend to use Mono.Cecil.'
+      status: 4
+      errors: []
+      versions:
+        all:
+        - 0.1.6-preview.2
+        - 1.0.0-preview.1
+        - 1.10.0-preview.1
+        - 1.10.1-preview.1
+        - 1.10.1
+        compatible:
+        - 0.1.6-preview.2
+        - 1.0.0-preview.1
+        - 1.10.0-preview.1
+        - 1.10.1-preview.1
+        - 1.10.1
+        verified: 
+      dependencies: []
+      resolvedDependencies: []
+      keywords: []
+      registry:
+        id: main
+        name: 
+        url: https://packages.unity.com
+        scopes: []
+        isDefault: 1
+        capabilities: 7
+      hasRegistry: 1
+      hideInEditor: 1
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 637414275090000000
+      documentationUrl: 
+      hasRepository: 1
+      repository:
+        type: git
+        url: https://github.cds.internal.unity3d.com/unity/com.unity.nuget.mono-cecil.git
+        revision: a3a6bd3697f92f6872f64c08a98ef2331394cd16
+        path: 
     - packageId: com.unity.nuget.newtonsoft-json@2.0.0
       testable: 0
       isDirectDependency: 0
@@ -2652,7 +2813,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: library
+      type: 
       description: 'Newtonsoft Json for use in Unity projects and Unity packages.
         Currently synced to version 12.0.2.
 
@@ -2667,11 +2828,27 @@ m_PackageAssets:
       errors: []
       versions:
         all:
+        - 1.0.0-preview.2
+        - 1.0.0-preview.3
+        - 1.0.0-preview.4
+        - 1.0.1-preview.1
         - 1.1.2
+        - 2.0.0-preview
+        - 2.0.0-preview.1
+        - 2.0.0-preview.2
         - 2.0.0
+        - 2.0.1-preview.1
         compatible:
+        - 1.0.0-preview.2
+        - 1.0.0-preview.3
+        - 1.0.0-preview.4
+        - 1.0.1-preview.1
         - 1.1.2
+        - 2.0.0-preview
+        - 2.0.0-preview.1
+        - 2.0.0-preview.2
         - 2.0.0
+        - 2.0.1-preview.1
         verified: 2.0.0
       dependencies: []
       resolvedDependencies: []
@@ -2688,7 +2865,7 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 0
+      datePublishedTicks: 637237898320000000
       documentationUrl: 
       hasRepository: 1
       repository:
