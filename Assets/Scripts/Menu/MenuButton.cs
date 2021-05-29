@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuButton : MonoBehaviour
 {
@@ -6,7 +7,12 @@ public class MenuButton : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] AnimatorFunctions animatorFunctions;
     [SerializeField] int thisIndex;
+    private Button button;
 
+    private void Start()
+    {
+        button = GetComponent<Button>();
+    }
     private void Update()
     {
         ActionMenuButton();
@@ -16,13 +22,18 @@ public class MenuButton : MonoBehaviour
         if (menuButtonController.index == thisIndex)
         {
             animator.SetBool("selected", true);
-            if (Input.GetAxis("Submit") == 1)
+            if(Input.GetButton("Submit"))
             {
                 animator.SetBool("pressed", true);
+                button.Select();
             }
             else if (animator.GetBool("pressed"))
             {
                 animator.SetBool("pressed", false);
+            }
+            if (Input.GetMouseButton(0))
+            {
+                animator.SetBool("pressed", true);
             }
         }
         else

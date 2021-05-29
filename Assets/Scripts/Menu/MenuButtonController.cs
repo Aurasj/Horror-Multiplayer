@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class MenuButtonController : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class MenuButtonController : MonoBehaviour
     private bool keyDown;
     [SerializeField] int maxIndex;
     public AudioSource audioSource;
+    [SerializeField] private TMP_Text highlightedText;
 
     private void Start()
     {
@@ -50,10 +52,38 @@ public class MenuButtonController : MonoBehaviour
                 }
                 keyDown = true;
             }
+            CheckHighlightedText();
         }
         else
         {
             keyDown = false;
+        }
+    }
+    public void CheckHighlightedText()
+    {
+        if(index == 0)
+        {
+            highlightedText.text = "Singleplayer";
+        }
+        else if (index == 1)
+        {
+            highlightedText.text = "Multiplayer";
+        }
+        else if (index == 2)
+        {
+            highlightedText.text = "Settings";
+        }
+        else if (index == 3)
+        {
+            highlightedText.text = "Credits";
+        }
+        else if (index == 4)
+        {
+            highlightedText.text = "Quit";
+        }
+        else
+        {
+            highlightedText.text = "Nothing Selected";
         }
     }
 }
