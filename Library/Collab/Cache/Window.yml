@@ -14,12 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
+    - Assets/Animations.meta
+    - Assets/Animations/MenuButtons.meta
+    - Assets/Animations/MenuButtons/MenuButton.controller
+    - Assets/Animations/MenuButtons/MenuButton.controller.meta
+    - Assets/Animations/MenuButtons/deselected.anim
+    - Assets/Animations/MenuButtons/deselected.anim.meta
+    - Assets/Animations/MenuButtons/press.anim
+    - Assets/Animations/MenuButtons/press.anim.meta
+    - Assets/Animations/MenuButtons/selected.anim
+    - Assets/Animations/MenuButtons/selected.anim.meta
     - Assets/Scenes.meta
     - Assets/Scenes/Menu.unity
     - Assets/Scenes/Menu.unity.meta
     - Assets/Scripts.meta
     - Assets/Scripts/FacCevaSmecher.cs
     - Assets/Scripts/FacCevaSmecher.cs.meta
+    - Assets/Scripts/Menu.meta
+    - Assets/Scripts/Menu/AnimatorFunctions.cs
+    - Assets/Scripts/Menu/AnimatorFunctions.cs.meta
+    - Assets/Scripts/Menu/InteractableMenuButtons.cs
+    - Assets/Scripts/Menu/InteractableMenuButtons.cs.meta
+    - Assets/Scripts/Menu/MenuButton.cs
+    - Assets/Scripts/Menu/MenuButton.cs.meta
+    - Assets/Scripts/Menu/MenuButtonController.cs
+    - Assets/Scripts/Menu/MenuButtonController.cs.meta
+    - Assets/Sounds.meta
+    - Assets/Sounds/click_conversation_end.mp3
+    - Assets/Sounds/click_conversation_end.mp3.meta
+    - Assets/Sounds/click_conversation_progress.mp3
+    - Assets/Sounds/click_conversation_progress.mp3.meta
     - Assets/Sprites.meta
     - Assets/Sprites/wp1998722.jpg
     - Assets/Sprites/wp1998722.jpg.meta
@@ -397,8 +421,8 @@ MonoBehaviour:
     - ProjectSettings/ProjectSettings.asset
     - ProjectSettings/UnityConnectSettings.asset
     - 
-    m_Values: 01010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
-  RevisionSummary: First Commit
+    m_Values: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
   HistoryPageNumber: 0

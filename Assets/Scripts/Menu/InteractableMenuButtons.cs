@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class InteractableMenuButtons : MonoBehaviour
 {
+    [SerializeField] private GameObject MainMenu;
+    [SerializeField] private GameObject SettingsPanel;
     public void SingleplayerButton()
     {
         Debug.Log("No Singleplayer scene available at the moment");
@@ -14,7 +16,8 @@ public class InteractableMenuButtons : MonoBehaviour
     }
     public void SettingsButton()
     {
-        Debug.Log("No Settings available at the moment");
+        MainMenu.SetActive(false);
+        SettingsPanel.SetActive(true);
         //TODO
     }
     public void CreditsButton()
