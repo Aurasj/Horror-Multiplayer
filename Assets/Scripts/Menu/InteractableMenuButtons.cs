@@ -4,6 +4,7 @@ public class InteractableMenuButtons : MonoBehaviour
 {
     [SerializeField] private GameObject MainMenu;
     [SerializeField] private GameObject SettingsPanel;
+
     public void SingleplayerButton()
     {
         Debug.Log("No Singleplayer scene available at the moment");

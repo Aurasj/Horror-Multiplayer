@@ -1,67 +1,20 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class MenuButtonController : MonoBehaviour
 {
     [SerializeField] public int index;
-    private bool keyDown;
-    [SerializeField] int maxIndex;
-    public AudioSource audioSource;
     [SerializeField] private TMP_Text highlightedText;
 
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-    private void Update()
-    {
-        CheckIndex(index);
-    }
+    [SerializeField] public AudioSource audioSource;
     public void CheckIndex(int indexx)
     {
         index = indexx;
-        if (Input.GetAxis("Vertical") != 0)
-        {
-            if (!keyDown)
-            {
-                if (Input.GetAxis("Vertical") < 0)
-                {
-                    if (index < maxIndex)
-                    {
-                        index++;
-                        indexx++;
-                    }
-                    else
-                    {
-                        index = 0;
-                        indexx = 0;
-                    }
-                }
-                else if (Input.GetAxis("Vertical") > 0)
-                {
-                    if (index > 0)
-                    {
-                        index--;
-                        indexx--;
-                    }
-                    else
-                    {
-                        index = maxIndex;
-                        indexx = maxIndex;
-                    }
-                }
-                keyDown = true;
-            }
-            CheckHighlightedText();
-        }
-        else
-        {
-            keyDown = false;
-        }
+        CheckHighlightedText();
     }
-    public void CheckHighlightedText()
+    private void CheckHighlightedText()
     {
-        if(index == 0)
+        if (index == 0)
         {
             highlightedText.text = "Singleplayer";
         }
