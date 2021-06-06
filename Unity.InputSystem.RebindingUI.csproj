@@ -56,12 +56,13 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Samples\Input System\1.0.2\Rebinding UI\RebindActionUI.cs" />
-    <Compile Include="Assets\Samples\Input System\1.0.2\Rebinding UI\RebindActionUIEditor.cs" />
-    <Compile Include="Assets\Samples\Input System\1.0.2\Rebinding UI\GamepadIconsExample.cs" />
+    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Rebinding UI\RebindActionUI.cs" />
+    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Rebinding UI\RebindActionUIEditor.cs" />
+    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Rebinding UI\GamepadIconsExample.cs" />
+    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Rebinding UI\RebindSaveLoad.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Samples\Input System\1.0.2\Rebinding UI\Unity.InputSystem.RebindingUI.asmdef" />
+    <None Include="Assets\Samples\Input System\1.1.0-pre.5\Rebinding UI\Unity.InputSystem.RebindingUI.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

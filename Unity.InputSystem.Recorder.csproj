@@ -56,11 +56,11 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Samples\Input System\1.0.2\Input Recorder\InputRecorder.cs" />
-    <Compile Include="Assets\Samples\Input System\1.0.2\Input Recorder\InputRecorderInspector.cs" />
+    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Input Recorder\InputRecorder.cs" />
+    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Input Recorder\InputRecorderInspector.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Samples\Input System\1.0.2\Input Recorder\Unity.InputSystem.Recorder.asmdef" />
+    <None Include="Assets\Samples\Input System\1.1.0-pre.5\Input Recorder\Unity.InputSystem.Recorder.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

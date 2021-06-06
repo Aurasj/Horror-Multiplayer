@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.InputSystem.Rebinding
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.InputSystem.Recorder", "Unity.InputSystem.Recorder.csproj", "{06F456A3-D52B-7EA0-8815-48C4BA54FAE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.InputSystem.VirtualMouseInput", "Unity.InputSystem.VirtualMouseInput.csproj", "{47422AD0-2885-780C-3BC4-915FEBE3D184}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +31,6 @@ Global
 		{06F456A3-D52B-7EA0-8815-48C4BA54FAE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06F456A3-D52B-7EA0-8815-48C4BA54FAE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06F456A3-D52B-7EA0-8815-48C4BA54FAE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{47422AD0-2885-780C-3BC4-915FEBE3D184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47422AD0-2885-780C-3BC4-915FEBE3D184}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47422AD0-2885-780C-3BC4-915FEBE3D184}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47422AD0-2885-780C-3BC4-915FEBE3D184}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

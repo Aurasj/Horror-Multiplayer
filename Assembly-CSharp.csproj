@@ -70,7 +70,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Scripts\Menu\InteractableMenuButtons.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\Samples\Input System\1.0.2\Custom Binding Composite\CustomComposite.cs" />
+    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Custom Binding Composite\CustomComposite.cs" />
+    <Compile Include="Assets\Scripts\Menu\RebindingControls.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuSettings.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Samples\Input System\1.0.2\Simple Multiplayer\SimpleMultiplayerPlayer.cs" />
+    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Simple Multiplayer\SimpleMultiplayerPlayer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
@@ -99,7 +100,8 @@
     <Compile Include="Assets\Scripts\FacCevaSmecher.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-    <Compile Include="Assets\Scripts\Menu\RebindingControls.cs" />
+    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Custom Device\CustomDevice.cs" />
+    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Custom Device Usages\CustomDeviceUsages.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -739,17 +741,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.InputSystem.Recorder.csproj">
-      <Project>{06F456A3-D52B-7EA0-8815-48C4BA54FAE1}</Project>
-      <Name>Unity.InputSystem.Recorder</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.InputSystem.VirtualMouseInput.csproj">
-      <Project>{47422AD0-2885-780C-3BC4-915FEBE3D184}</Project>
-      <Name>Unity.InputSystem.VirtualMouseInput</Name>
-    </ProjectReference>
     <ProjectReference Include="SteamP2P MLAPI Transport.csproj">
       <Project>{9AF677BF-80E7-FA9B-715C-23FA595A965C}</Project>
       <Name>SteamP2P MLAPI Transport</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InputSystem.Recorder.csproj">
+      <Project>{06F456A3-D52B-7EA0-8815-48C4BA54FAE1}</Project>
+      <Name>Unity.InputSystem.Recorder</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

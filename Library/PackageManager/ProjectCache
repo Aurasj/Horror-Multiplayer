@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637583467861075368
-    m_Hash: 3090059818
+      ticks: 637586034874879791
+    m_Hash: 3994937720
   m_LockFileStatus:
     m_FilePath: C:/Users/theli/Documents/GitHub/Horror-Multiplayer/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637583467861755429
-    m_Hash: 1144564777
+      ticks: 637586034875313976
+    m_Hash: 1243665412
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -423,12 +423,12 @@ m_PackageAssets:
         url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.vscode.git
         revision: b5ec9b38109e52b1b26597d521e4df75e042ebb9
         path: 
-    - packageId: com.unity.inputsystem@1.0.2
+    - packageId: com.unity.inputsystem@1.1.0-pre.5
       testable: 0
       isDirectDependency: 1
-      version: 1.0.2
+      version: 1.1.0-pre.5
       source: 1
-      resolvedPath: C:\Users\theli\Documents\GitHub\Horror-Multiplayer\Library\PackageCache\com.unity.inputsystem@1.0.2
+      resolvedPath: C:\Users\theli\Documents\GitHub\Horror-Multiplayer\Library\PackageCache\com.unity.inputsystem@1.1.0-pre.5
       assetPath: Packages/com.unity.inputsystem
       name: com.unity.inputsystem
       displayName: Input System
@@ -502,8 +502,20 @@ m_PackageAssets:
         - 1.1.0-preview.2
         - 1.1.0-preview.3
         verified: 1.0.2
-      dependencies: []
-      resolvedDependencies: []
+      dependencies:
+      - name: com.unity.modules.uielements
+        version: 1.0.0
+      resolvedDependencies:
+      - name: com.unity.modules.uielements
+        version: 1.0.0
+      - name: com.unity.modules.ui
+        version: 1.0.0
+      - name: com.unity.modules.imgui
+        version: 1.0.0
+      - name: com.unity.modules.jsonserialize
+        version: 1.0.0
+      - name: com.unity.modules.uielementsnative
+        version: 1.0.0
       keywords:
       - input
       - events
@@ -525,13 +537,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637468486210000000
+      datePublishedTicks: 637566175470000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
         url: git+https://github.com/Unity-Technologies/InputSystem.git
-        revision: 041def76515febb36a83d1f928cfb7aefb85176c
+        revision: 235baf96acbccfbca3f8e6543cc535d861c20db4
         path: 
     - packageId: com.unity.multiplayer.mlapi@0.1.0
       testable: 0

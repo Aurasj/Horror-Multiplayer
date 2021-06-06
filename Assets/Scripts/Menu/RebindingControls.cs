@@ -1,25 +1,23 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class RebindingControls : MonoBehaviour
 {
-    [SerializeField] private InputActionReference moveForward = null;
-    [SerializeField] private PlayerController playerController = null;
-    [SerializeField] private Button bindingButton = null;
-    [SerializeField] private GameObject startingRebindObject = null;
-    [SerializeField] private GameObject waitingForInputObject = null;
-
-    public void StartRebinding()
+    [SerializeField] private InputActionAsset actions;
+    public void SaveBindings()
     {
-        startingRebindObject.SetActive(false);
-        waitingForInputObject.SetActive(true);
-
-        playerController.PlayerInput.SwitchCurrentActionMap("Menu");
-
-        moveForward.action.PerformInteractiveRebinding();
-
+        var rebinds = actions.SaveBindingOverridesAsJson();
+        PlayerPrefs.SetString("rebinds", rebinds);
+        Debug.Log("Save bindings!");
     }
-
+    public void ResetBindings()
+    {
+        foreach(InputActionMap map in actions.actionMaps)
+        {
+            map.RemoveAllBindingOverrides();
+            Debug.Log("Reset bindings!");
+        }
+        PlayerPrefs.DeleteKey("rebinds");
+    }
 
 }
