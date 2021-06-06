@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InteractableMenuButtons : MonoBehaviour
 {
@@ -7,8 +8,7 @@ public class InteractableMenuButtons : MonoBehaviour
 
     public void SingleplayerButton()
     {
-        Debug.Log("No Singleplayer scene available at the moment");
-        //TODO
+        SceneManager.LoadScene("Singleplayer", LoadSceneMode.Single);
     }
     public void MultiplayerButton()
     {
