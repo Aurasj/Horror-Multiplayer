@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MLAPI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private PlayerInput playerInput = null;
 
@@ -9,8 +10,27 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 2;
 
     public PlayerInput PlayerInput => playerInput;
-    private void Update()
+    public override void NetworkStart()
     {
+        base.NetworkStart();
+
+        if (IsLocalPlayer)
+        {
+            var renderColor = GetComponent<Renderer>();
+            renderColor.material.SetColor("_Color", Color.blue);
+        }
+        else
+        {
+            var renderColor = GetComponent<Renderer>();
+            renderColor.material.SetColor("_Color", Color.red);
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (!IsLocalPlayer)
+        {
+            return;
+        }
         Move(moveDirection);
     }
     public void OnMove(InputAction.CallbackContext context)

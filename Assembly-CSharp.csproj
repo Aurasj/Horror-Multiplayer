@@ -53,14 +53,16 @@
     <UnityVersion>2020.3.9f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Menu\MenuButtonController.cs" />
+    <Compile Include="Assets\Scripts\SteamManager\RoomListing.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Custom Device\CustomDevice.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Scripts\Menu\AnimatorFunctions.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
+    <Compile Include="Assets\Scripts\SteamManager\ServersList.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
@@ -100,8 +103,8 @@
     <Compile Include="Assets\Scripts\FacCevaSmecher.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Custom Device\CustomDevice.cs" />
     <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Custom Device Usages\CustomDeviceUsages.cs" />
+    <Compile Include="Assets\Scripts\SteamManager\PlayerLobbyListing.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -741,13 +744,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="SteamP2P MLAPI Transport.csproj">
-      <Project>{9AF677BF-80E7-FA9B-715C-23FA595A965C}</Project>
-      <Name>SteamP2P MLAPI Transport</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.InputSystem.Recorder.csproj">
       <Project>{06F456A3-D52B-7EA0-8815-48C4BA54FAE1}</Project>
       <Name>Unity.InputSystem.Recorder</Name>
+    </ProjectReference>
+    <ProjectReference Include="SteamP2P MLAPI Transport.csproj">
+      <Project>{9AF677BF-80E7-FA9B-715C-23FA595A965C}</Project>
+      <Name>SteamP2P MLAPI Transport</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

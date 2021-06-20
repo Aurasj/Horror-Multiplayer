@@ -53,13 +53,13 @@
     <UnityVersion>2020.3.9f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Rebinding UI\RebindSaveLoad.cs" />
     <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Rebinding UI\RebindActionUI.cs" />
     <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Rebinding UI\RebindActionUIEditor.cs" />
     <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Rebinding UI\GamepadIconsExample.cs" />
-    <Compile Include="Assets\Samples\Input System\1.1.0-pre.5\Rebinding UI\RebindSaveLoad.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Samples\Input System\1.1.0-pre.5\Rebinding UI\Unity.InputSystem.RebindingUI.asmdef" />

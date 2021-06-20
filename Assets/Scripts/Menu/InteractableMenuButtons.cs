@@ -89,8 +89,12 @@ public class InteractableMenuButtons : MonoBehaviour
             startButton.interactable = true;
         }
 
+        //int NumberToClamp = 0;
+
         nameInputField.characterLimit = 20;
         playersInputField.characterLimit = 1;
+        //NumberToClamp = Mathf.Clamp(NumberToClamp, 2, 8);
+        //playersInputField.text = NumberToClamp.ToString();
     }
     //Settings
     public void SettingsButton()
