@@ -1,2 +1,2 @@
 Bugs
--In MainMenu selectezi un buton cu Vertical Input, dai Submit ,apoi muti mouse-ul deasupra altui buton fara sa apesi si dai Submit din nou si se apasa acelasi buton de prima data, se intampla doar o data. 
+-------- Cand apare mai mult cod in joc avem nevoie de informatii pentru a vedea bugurile si sa le rezolvam//
