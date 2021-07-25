@@ -1,0 +1,133 @@
+using Steamworks;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class SteamChat : MonoBehaviour
+{
+    protected Callback<LobbyChatMsg_t> Callback_lobbyChatMsg;
+
+
+    //[SerializeField] private TMP_Text chatText;
+    //[SerializeField] private TMP_InputField chatBox;
+    bool isChatting = false;
+    string chatInput = "";
+
+    [System.Serializable]
+    public class ChatMessage
+    {
+        public string sender = "";
+        public string message = "";
+        public float timer = 0;
+    }
+
+    List<ChatMessage> chatMessages = new List<ChatMessage>();
+
+    string personaName;
+
+    ServersList serversList;
+
+
+    void Start()
+    {
+        Callback_lobbyChatMsg = Callback<LobbyChatMsg_t>.Create(OnLobbyChatMsg);
+
+        serversList = FindObjectOfType<ServersList>();
+
+        if (SteamAPI.Init())
+        {
+            Debug.Log("Steam API init -- SUCCESS!");
+            personaName = SteamFriends.GetPersonaName();
+        }
+        else
+        {
+            Debug.Log("Steam API init -- failure ...");
+        }
+    }
+
+    void Update()
+    {
+        SteamAPI.RunCallbacks();
+
+        //Chat
+        if (Input.GetKeyUp(KeyCode.Y) && !isChatting)
+        {
+            isChatting = true;
+            chatInput = "";
+        }
+
+        //Hide messages after timer is expired
+        for (int i = 0; i < chatMessages.Count; i++)
+        {
+            if (chatMessages[i].timer > 0)
+            {
+                chatMessages[i].timer -= Time.deltaTime;
+            }
+        }
+    }
+    void OnGUI()
+    {
+        if (!isChatting)
+        {
+            GUI.Label(new Rect(5, Screen.height - 25, 200, 25), "'Y' to chat");
+        }
+        else
+        {
+            if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return)
+            {
+                isChatting = false;
+                if (chatInput.Replace(" ", "") != "")
+                {
+                    //Send message
+                    SubmitChatText(chatInput);
+                }
+                chatInput = "";
+            }
+
+            GUI.SetNextControlName("ChatField");
+            GUI.Label(new Rect(5, Screen.height - 25, 200, 25), "Say:");
+            GUIStyle inputStyle = GUI.skin.GetStyle("box");
+            inputStyle.alignment = TextAnchor.MiddleLeft;
+            chatInput = GUI.TextField(new Rect(10 + 25, Screen.height - 27, 400, 22), chatInput, 60, inputStyle);
+
+            GUI.FocusControl("ChatField");
+        }
+
+        //Show messages
+        for (int i = 0; i < chatMessages.Count; i++)
+        {
+            if (chatMessages[i].timer > 0 || isChatting)
+            {
+                GUI.Label(new Rect(5, Screen.height - 50 - 25 * i, 500, 25), chatMessages[i].sender + ": " + chatMessages[i].message);
+            }
+        }
+    }
+
+    public void SubmitChatText(string text)
+    {
+        chatInput += personaName + ": " + text + '\n';
+
+        byte[] bytes = System.Text.Encoding.ASCII.GetBytes(text);
+        Debug.Log("Chat: " + personaName + ": '" + text + "' Len: " + text.Length + " bLen: " + bytes.Length);
+        SteamMatchmaking.SendLobbyChatMsg((CSteamID)serversList.current_lobbyID, bytes, bytes.Length + 1);
+    }
+
+    void OnLobbyChatMsg(LobbyChatMsg_t pCallback)
+    {
+        Debug.Log("[" + LobbyChatMsg_t.k_iCallback + " - LobbyChatMsg] - " + pCallback.m_ulSteamIDLobby + " -- " + pCallback.m_ulSteamIDUser + " -- " + pCallback.m_eChatEntryType + " -- " + pCallback.m_iChatID);
+
+        CSteamID SteamIDUser;
+        byte[] Data = new byte[4096];
+        EChatEntryType ChatEntryType;
+        int ret = SteamMatchmaking.GetLobbyChatEntry((CSteamID)pCallback.m_ulSteamIDLobby, (int)pCallback.m_iChatID, out SteamIDUser, Data, Data.Length, out ChatEntryType);
+
+        Debug.Log("SteamMatchmaking.GetLobbyChatEntry(" + (CSteamID)pCallback.m_ulSteamIDLobby + ", " + (int)pCallback.m_iChatID + ", out SteamIDUser, Data, Data.Length, out ChatEntryType) : " + ret + " -- " + SteamIDUser + " -- " + System.Text.Encoding.UTF8.GetString(Data) + " -- " + ChatEntryType);
+
+        //if (SteamIDUser.ToString() != SteamUser.GetSteamID().ToString())
+        // {
+        chatInput = "";
+        string data = System.Text.Encoding.Default.GetString(Data);
+        chatInput += personaName + ": " + data + '\n';
+        //  }
+    }
+}
