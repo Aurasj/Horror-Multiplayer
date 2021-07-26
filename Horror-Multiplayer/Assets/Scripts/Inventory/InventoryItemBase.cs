@@ -1,5 +1,6 @@
 using MLAPI;
 using MLAPI.Messaging;
+using MLAPI.Spawning;
 using UnityEngine;
 
 public class InventoryItemBase : NetworkBehaviour
@@ -28,6 +29,18 @@ public class InventoryItemBase : NetworkBehaviour
     }
     public virtual void OnUse()
     {
+        OnUserServerRpc();
+    }
+    [ServerRpc]
+    private void OnUserServerRpc()
+    {
+        //Debug.Log("Client wants to change object position to hand position");
+        OnUseClientClientRpc();
+    }
+    [ClientRpc]
+    private void OnUseClientClientRpc()
+    {
+        //Debug.Log("Client changed object position to hand position");
         transform.localPosition = PickPosition;
         transform.localEulerAngles = PickRotation;
     }
@@ -42,12 +55,29 @@ public class InventoryItemBase : NetworkBehaviour
             gameObject.transform.eulerAngles = DropRotation;
         }
     }
+
     [ServerRpc]
     public virtual void OnPickupServerRpc()
     {
-        Destroy(gameObject.GetComponent<Rigidbody>());
-        gameObject.SetActive(false);
+        //Debug.Log("Client wants to pickup object");
+
+        ulong netId = NetworkManager.Singleton.LocalClientId;
+        gameObject.GetComponent<NetworkObject>().ChangeOwnership(netId);
+        ulong itemNetId = gameObject.GetComponent<NetworkObject>().NetworkObjectId;
+
+        OnPickupClientRpc(itemNetId);
     }
+    [ClientRpc]
+    private void OnPickupClientRpc(ulong itemNetId)
+    {
+        //Debug.Log("Client is pickup");
+        NetworkObject netObj = NetworkSpawnManager.SpawnedObjects[itemNetId];
+
+        Destroy(netObj.gameObject.GetComponent<Rigidbody>());
+        netObj.gameObject.SetActive(false);
+
+    }
+
     public Vector3 PickPosition;
 
     public Vector3 PickRotation;

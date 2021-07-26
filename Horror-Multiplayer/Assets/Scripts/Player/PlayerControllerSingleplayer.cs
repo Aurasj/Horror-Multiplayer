@@ -35,7 +35,7 @@ public class PlayerControllerSingleplayer : MonoBehaviour
         var renderColor = GetComponentInChildren<Renderer>();
         renderColor.material.SetColor("_Color", Color.blue);
 
-        inventory.ItemUsed += Inventory_ItemUsed;
+        //inventory.ItemUsed += Inventory_ItemUsed;
         inventory.ItemRemoved += Inventory_ItemRemoved;
     }
 

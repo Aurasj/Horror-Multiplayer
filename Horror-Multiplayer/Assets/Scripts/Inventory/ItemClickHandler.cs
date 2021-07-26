@@ -43,7 +43,6 @@ public class ItemClickHandler : MonoBehaviour
             return dragHandler.Item;
         }
     }
-
     public void OnItemClicked()
     {
         InventoryItemBase item = AttachedItem;

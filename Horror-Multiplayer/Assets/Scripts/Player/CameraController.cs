@@ -89,8 +89,7 @@ public class CameraController : NetworkBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
     }
-    [ServerRpc]
-    public void RaycastPickupServerRpc()
+    public void RaycastPickup()
     {
         RaycastHit hit;
 

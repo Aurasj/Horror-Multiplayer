@@ -1,5 +1,4 @@
 using MLAPI;
-using MLAPI.Messaging;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,11 +24,6 @@ public class PlayerController : NetworkBehaviour
 
     [SerializeField] public bool isMoving;
 
-    public GameObject Hand;
-
-    private InventoryItemBase mCurrentItem = null;
-    Inventory inventory;
-
     public override void NetworkStart()
     {
         base.NetworkStart();
@@ -51,10 +45,6 @@ public class PlayerController : NetworkBehaviour
             actions.LoadBindingOverridesFromJson(rebinds);
 
         characterController = GetComponent<CharacterController>();
-        inventory = FindObjectOfType<Inventory>();
-
-        inventory.ItemUsed += Inventory_ItemUsed;
-        inventory.ItemRemoved += Inventory_ItemRemoved;
     }
     private void Update()
     {
@@ -133,66 +123,5 @@ public class PlayerController : NetworkBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
-    }
-    [ServerRpc]
-    public void DropCurrentServerRpc()
-    {
-            if (mCurrentItem != null)
-            {
-                //TODO animation
-
-                GameObject goItem = (mCurrentItem as MonoBehaviour).gameObject;
-
-                inventory.RemoveItem(mCurrentItem);
-
-                Rigidbody rbItem = goItem.AddComponent<Rigidbody>();
-                if (rbItem != null)
-                {
-                    rbItem.AddForce(transform.forward * 2.0f, ForceMode.Impulse);
-
-                    Invoke("DoDropItem", 0.25f);
-                }
-            }
-    }
-    [ServerRpc]
-    public void DoDropItemServerRpc()
-    {
-        if (mCurrentItem != null)
-        {
-            Destroy((mCurrentItem as MonoBehaviour).GetComponent<Rigidbody>());
-
-            mCurrentItem = null;
-        }
-    }
-    private void SetItemActive(InventoryItemBase item, bool active)
-    {
-        GameObject currentItem = (item as MonoBehaviour).gameObject;
-        currentItem.SetActive(active);
-        currentItem.transform.parent = active ? Hand.transform : null;
-    }
-    private void Inventory_ItemUsed(object sender, InventoryEventArgs e)
-    {
-        if (mCurrentItem != null)
-        {
-            SetItemActive(mCurrentItem, false);
-        }
-
-        InventoryItemBase item = e.Item;
-
-        // Use item (put it to hand of the player)
-        SetItemActive(item, true);
-
-        mCurrentItem = e.Item;
-    }
-    private void Inventory_ItemRemoved(object sender, InventoryEventArgs e)
-    {
-        InventoryItemBase item = e.Item;
-
-        GameObject goItem = (item as MonoBehaviour).gameObject;
-        goItem.SetActive(true);
-        goItem.transform.parent = null;
-
-        if (item == mCurrentItem)
-            mCurrentItem = null;
     }
 }

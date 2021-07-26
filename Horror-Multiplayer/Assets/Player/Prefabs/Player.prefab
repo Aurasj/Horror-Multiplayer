@@ -1469,6 +1469,7 @@ GameObject:
   - component: {fileID: 4915851954747772309}
   - component: {fileID: 5118173011627157763}
   - component: {fileID: 9044438522311166810}
+  - component: {fileID: 1165197448972316753}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1751,7 +1752,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5118173011627157763}
         m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-        m_MethodName: RaycastPickupServerRpc
+        m_MethodName: RaycastPickup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1765,8 +1766,8 @@ MonoBehaviour:
     m_ActionName: Player/ItemPickup[/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4915851954747772309}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1165197448972316753}
+        m_TargetAssemblyTypeName: PlayerItems, Assembly-CSharp
         m_MethodName: DropCurrentServerRpc
         m_Mode: 1
         m_Arguments:
@@ -1807,7 +1808,6 @@ MonoBehaviour:
   isSprint: 0
   isGrounded: 0
   isMoving: 0
-  Hand: {fileID: 1977890971}
 --- !u!114 &5118173011627157763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1842,6 +1842,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 691061108}
   playerController: {fileID: 4915851954747772309}
+--- !u!114 &1165197448972316753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4915851954747772315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faba800f409217a429b4530daa782c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 1977890971}
 --- !u!1 &4915851955570624562
 GameObject:
   m_ObjectHideFlags: 0
