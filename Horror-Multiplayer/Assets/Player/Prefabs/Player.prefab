@@ -1753,7 +1753,7 @@ MonoBehaviour:
       - m_Target: {fileID: 5118173011627157763}
         m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
         m_MethodName: RaycastPickup
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

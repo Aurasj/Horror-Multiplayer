@@ -1,8 +1,8 @@
-using MLAPI;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class Inventory : NetworkBehaviour
+public class Inventory : MonoBehaviour
 {
     private const int SLOTS = 3;
 

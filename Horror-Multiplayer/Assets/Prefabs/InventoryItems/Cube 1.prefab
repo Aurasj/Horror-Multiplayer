@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 1821956330313829255}
   - component: {fileID: 1821956330313829248}
   - component: {fileID: 1821956330313829249}
-  - component: {fileID: 1821956330313829253}
-  - component: {fileID: 3647484445616762526}
-  - component: {fileID: 7282029104772505591}
+  - component: {fileID: -8923330302989501447}
+  - component: {fileID: 6631035464572315648}
+  - component: {fileID: -5688101481774600514}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Cube 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1821956330313829253
+--- !u!114 &-8923330302989501447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,14 +107,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1821956330313829250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f26cb527b12474044a04f4b600cc5c68, type: 3}
+  m_Script: {fileID: 11500000, guid: fccbf754f9d862540a60e3019180bba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Image: {fileID: 21300000, guid: 2da2d15ce082e12448ac493c55a33f0f, type: 3}
+  _Image: {fileID: 21300000, guid: c7f381483fb41f14e935b2d6d9fec62f, type: 3}
   PickPosition: {x: 0, y: 0, z: 0}
   PickRotation: {x: 0, y: 0, z: 0}
   DropRotation: {x: 0, y: 0, z: 0}
---- !u!114 &3647484445616762526
+--- !u!114 &6631035464572315648
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,11 +127,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NetworkInstanceId: 0
-  PrefabHash: 707014007058630310
-  PrefabHashGenerator: Cube
+  PrefabHash: 9052379684940740807
+  PrefabHashGenerator: Cube 1
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
---- !u!114 &7282029104772505591
+--- !u!114 &-5688101481774600514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

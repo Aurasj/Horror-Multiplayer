@@ -1,5 +1,4 @@
 using MLAPI;
-using MLAPI.Messaging;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,7 +29,7 @@ public class CameraController : NetworkBehaviour
         {
             playerCamera.GetComponent<AudioListener>().enabled = false;
             playerCamera.GetComponent<Camera>().enabled = false;
-            Debug.Log("!islocal");
+            //Debug.Log("!islocal");
         }
         else
         {
@@ -39,7 +38,7 @@ public class CameraController : NetworkBehaviour
             {
                 DestroyImmediate(audioListener[i]);
             }
-            Debug.Log("islocal");
+            //Debug.Log("islocal");
         }
 
         inMultiplayerGameManager = FindObjectOfType<InMultiplayerGameManager>();
@@ -89,18 +88,21 @@ public class CameraController : NetworkBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
     }
-    public void RaycastPickup()
+    public void RaycastPickup(InputAction.CallbackContext context)
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, objectPickupRange, avoidPlayer))
+        if (context.performed)
         {
-            InventoryItemBase item = hit.collider.GetComponent<InventoryItemBase>();
+            RaycastHit hit;
 
-            if (item != null)
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, objectPickupRange, avoidPlayer))
             {
-                inventory.AddItem(item);
-                item.OnPickupServerRpc();
+                InventoryItemBase item = hit.collider.GetComponent<InventoryItemBase>();
+
+                if (item != null)
+                {
+                    inventory.AddItem(item);
+                    item.OnPickupServerRpc();
+                }
             }
         }
     }

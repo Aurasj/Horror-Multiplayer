@@ -1,13 +1,11 @@
 using MLAPI;
 using MLAPI.Messaging;
+using MLAPI.Spawning;
 using UnityEngine;
 
 public class PlayerItems : NetworkBehaviour
 {
     [SerializeField] private GameObject hand;
-
-    private GameObject networkObject;
-    private bool isSetActive;
 
     private InventoryItemBase mCurrentItem = null;
     Inventory inventory;
@@ -41,6 +39,7 @@ public class PlayerItems : NetworkBehaviour
             GameObject goItem = (mCurrentItem as MonoBehaviour).gameObject;
 
             inventory.RemoveItem(mCurrentItem);
+            goItem.GetComponent<NetworkObject>().RemoveOwnership();
 
             Rigidbody rbItem = goItem.AddComponent<Rigidbody>();
             if (rbItem != null)
@@ -66,25 +65,29 @@ public class PlayerItems : NetworkBehaviour
 
     private void SetItemActive(InventoryItemBase item, bool active)
     {
-        networkObject = (item as MonoBehaviour).gameObject;
-        isSetActive = active;
+        ulong itemNetId = item.gameObject.GetComponent<NetworkObject>().NetworkObjectId;
 
-        SetItemActiveServerRpc();
+        SetItemActiveServerRpc(itemNetId, active);
     }
     [ServerRpc]
-    private void SetItemActiveServerRpc()
+    private void SetItemActiveServerRpc(ulong itemNetId, bool active)
     {
-        Debug.Log("Client wants to use object");
+        //Debug.Log("Client wants to use object");
 
-        SetItemActiveClientRpc();
+        SetItemActiveClientRpc(itemNetId, active);
     }
     [ClientRpc]
-    private void SetItemActiveClientRpc()
+    private void SetItemActiveClientRpc(ulong itemNetId, bool active)
     {
-        Debug.Log("Client is using object");
+        //Debug.Log("Client is using object");
 
-        networkObject.SetActive(isSetActive);
-        networkObject.transform.parent = isSetActive ? hand.transform : null;
+        NetworkObject netObj = NetworkSpawnManager.SpawnedObjects[itemNetId];
+
+        //netObj.transform.parent = active ? hand.transform : null;
+        netObj.transform.position = hand.transform.position;
+        netObj.transform.SetParent(hand.transform);
+
+        netObj.gameObject.SetActive(active);
     }
     private void Inventory_ItemUsed(object sender, InventoryEventArgs e)
     {

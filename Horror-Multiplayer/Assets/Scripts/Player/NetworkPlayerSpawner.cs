@@ -46,7 +46,7 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     private void SpawnClientRpc(ulong objectId)
     {
         NetworkObject newPlayer = NetworkSpawnManager.SpawnedObjects[objectId];
-        Debug.Log(newPlayer);
-        Debug.Log(objectId);
+       // Debug.Log(newPlayer);
+       // Debug.Log(objectId);
     }
 }
