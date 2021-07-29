@@ -27,25 +27,36 @@ public class InventoryItemBase : NetworkBehaviour
             return _Image;
         }
     }
+
+    #region OnUse
+
     public virtual void OnUse()
     {
         OnUserServerRpc();
     }
-    [ServerRpc]
+
+    [ServerRpc(RequireOwnership = false)]
     private void OnUserServerRpc()
     {
-        //Debug.Log("Client wants to change object position to hand position");
+        //Debug.Log("Client wants to change object position in the hand parent transform");
         OnUseClientClientRpc();
     }
+
     [ClientRpc]
     private void OnUseClientClientRpc()
     {
-        //Debug.Log("Client changed object position to hand position");
+        //Debug.Log("Client changed object position in the hand parent transform");
         transform.localPosition = PickPosition;
         transform.localEulerAngles = PickRotation;
     }
+
+    #endregion
+
+    #region OnDrop
+
     public virtual void OnDrop()
     {
+        //Debug.log("Drop item by drag out inventory item");
         RaycastHit hit = new RaycastHit();
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, 1000))
@@ -56,7 +67,11 @@ public class InventoryItemBase : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    #endregion
+
+    #region OnPickup
+
+    [ServerRpc(RequireOwnership = false)]
     public virtual void OnPickupServerRpc()
     {
         //Debug.Log("Client wants to pickup object");
@@ -67,6 +82,7 @@ public class InventoryItemBase : NetworkBehaviour
 
         OnPickupClientRpc(itemNetId);
     }
+
     [ClientRpc]
     private void OnPickupClientRpc(ulong itemNetId)
     {
@@ -77,6 +93,8 @@ public class InventoryItemBase : NetworkBehaviour
         netObj.gameObject.SetActive(false);
 
     }
+
+    #endregion
 
     public Vector3 PickPosition;
 

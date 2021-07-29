@@ -8,16 +8,21 @@ public class CameraController : NetworkBehaviour
     [SerializeField] float sensitivityY = 0.3f;
     Vector2 mouseInput;
 
+    [Space(10f)]
     [SerializeField] Transform playerCamera;
     [SerializeField] Transform headPlayer;
     [SerializeField] float xClamp = 60f;
     float XRotation = 0f;
 
+    [Space(10f)]
     InMultiplayerGameManager inMultiplayerGameManager;
 
+    [Space(10f)]
     Inventory inventory;
     public LayerMask avoidPlayer;
     private float objectPickupRange = 3;
+
+    #region StartUpdate
 
     public override void NetworkStart()
     {
@@ -46,6 +51,7 @@ public class CameraController : NetworkBehaviour
 
 
     }
+
     private void FixedUpdate()
     {
         if (!IsLocalPlayer) { return; }
@@ -55,6 +61,11 @@ public class CameraController : NetworkBehaviour
             MoveCamera(mouseInput);
         }
     }
+
+    #endregion
+
+    #region CameraInput
+
     void MoveCamera(Vector2 mouse)
     {
         XRotation -= mouse.y * sensitivityY;
@@ -80,14 +91,16 @@ public class CameraController : NetworkBehaviour
 
         transform.Rotate(Vector3.up * mouseX * 3);*/
     }
+
     public void MouseInput(InputAction.CallbackContext context)
     {
         mouseInput = context.ReadValue<Vector2>();
     }
-    private void OnDisable()
-    {
-        Cursor.lockState = CursorLockMode.None;
-    }
+
+    #endregion
+
+    #region Actions
+
     public void RaycastPickup(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -100,6 +113,8 @@ public class CameraController : NetworkBehaviour
 
                 if (item != null)
                 {
+                    if (!IsLocalPlayer) { return; }
+
                     inventory.AddItem(item);
                     item.OnPickupServerRpc();
                 }
@@ -107,4 +122,10 @@ public class CameraController : NetworkBehaviour
         }
     }
 
+    #endregion
+
+    private void OnDisable()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
 }

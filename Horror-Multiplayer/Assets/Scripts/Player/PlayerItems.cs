@@ -20,13 +20,16 @@ public class PlayerItems : NetworkBehaviour
         inventory.ItemRemoved += Inventory_ItemRemoved;
     }
 
-    [ServerRpc]
+    #region DropItem
+
+    [ServerRpc(RequireOwnership = false)]
     public void DropCurrentServerRpc()
     {
         //Debug.Log("Client wats to drop the object");
-
+        if (!IsLocalPlayer) { return; }
         DropCurrentClientRpc();
     }
+
     [ClientRpc]
     private void DropCurrentClientRpc()
     {
@@ -39,6 +42,9 @@ public class PlayerItems : NetworkBehaviour
             GameObject goItem = (mCurrentItem as MonoBehaviour).gameObject;
 
             inventory.RemoveItem(mCurrentItem);
+
+            goItem.SetActive(true);
+            goItem.transform.parent = null;
             goItem.GetComponent<NetworkObject>().RemoveOwnership();
 
             Rigidbody rbItem = goItem.AddComponent<Rigidbody>();
@@ -63,19 +69,54 @@ public class PlayerItems : NetworkBehaviour
         }
     }
 
+    private void Inventory_ItemRemoved(object sender, InventoryEventArgs e)
+    {
+        InventoryItemBase item = e.Item;
+
+        GameObject goItem = (item as MonoBehaviour).gameObject;
+        // goItem.SetActive(true);
+        //goItem.transform.parent = null;
+
+        if (item == mCurrentItem)
+            mCurrentItem = null;
+
+        Debug.Log(goItem.transform.parent);
+    }
+
+    #endregion
+
+    #region SetItemActive
+
+    private void Inventory_ItemUsed(object sender, InventoryEventArgs e)
+    {
+        if (!IsLocalPlayer) { return; }
+        if (mCurrentItem != null)
+        {
+            SetItemActive(mCurrentItem, false);
+        }
+
+        InventoryItemBase item = e.Item;
+
+        SetItemActive(item, true);
+
+        mCurrentItem = e.Item;
+    }
+
     private void SetItemActive(InventoryItemBase item, bool active)
     {
         ulong itemNetId = item.gameObject.GetComponent<NetworkObject>().NetworkObjectId;
 
         SetItemActiveServerRpc(itemNetId, active);
     }
-    [ServerRpc]
+
+    [ServerRpc(RequireOwnership = false)]
     private void SetItemActiveServerRpc(ulong itemNetId, bool active)
     {
         //Debug.Log("Client wants to use object");
 
         SetItemActiveClientRpc(itemNetId, active);
     }
+
     [ClientRpc]
     private void SetItemActiveClientRpc(ulong itemNetId, bool active)
     {
@@ -89,29 +130,6 @@ public class PlayerItems : NetworkBehaviour
 
         netObj.gameObject.SetActive(active);
     }
-    private void Inventory_ItemUsed(object sender, InventoryEventArgs e)
-    {
-        if (mCurrentItem != null)
-        {
-            SetItemActive(mCurrentItem, false);
-        }
 
-        InventoryItemBase item = e.Item;
-
-        SetItemActive(item, true);
-
-        mCurrentItem = e.Item;
-    }
-
-    private void Inventory_ItemRemoved(object sender, InventoryEventArgs e)
-    {
-        InventoryItemBase item = e.Item;
-
-        GameObject goItem = (item as MonoBehaviour).gameObject;
-        goItem.SetActive(true);
-        goItem.transform.parent = null;
-
-        if (item == mCurrentItem)
-            mCurrentItem = null;
-    }
+    #endregion
 }
