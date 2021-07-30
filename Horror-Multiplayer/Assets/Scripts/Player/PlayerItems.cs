@@ -14,10 +14,22 @@ public class PlayerItems : NetworkBehaviour
     {
         base.NetworkStart();
 
-        inventory = FindObjectOfType<Inventory>();
+        if(!IsLocalPlayer) { return; }
 
-        inventory.ItemUsed += Inventory_ItemUsed;
-        inventory.ItemRemoved += Inventory_ItemRemoved;
+    }
+
+    private void Update()
+    {
+        if (!IsLocalPlayer) { return; }
+
+        //nu s bine astea aici ******************
+        if (!inventory)
+        {
+            inventory = FindObjectOfType<Inventory>();
+
+            inventory.ItemUsed += Inventory_ItemUsed;
+            inventory.ItemRemoved += Inventory_ItemRemoved;
+        }
     }
 
     #region DropItem

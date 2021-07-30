@@ -17,7 +17,7 @@ public class InMultiplayerGameManager : MonoBehaviour
 
     [HideInInspector] public ulong current_lobbyID;
 
-    [HideInInspector] public bool playerOnEnable = true;
+    [HideInInspector] public bool playerOnEnable = false;
 
     private void Awake()
     {

@@ -44,17 +44,21 @@ public class CameraController : NetworkBehaviour
                 DestroyImmediate(audioListener[i]);
             }
             //Debug.Log("islocal");
+
+            
         }
-
-        inMultiplayerGameManager = FindObjectOfType<InMultiplayerGameManager>();
-        inventory = FindObjectOfType<Inventory>();
-
-
     }
 
     private void FixedUpdate()
     {
         if (!IsLocalPlayer) { return; }
+
+        //nu s bine astea aici ******************
+        if (!inMultiplayerGameManager && !inventory)
+        {
+            inMultiplayerGameManager = FindObjectOfType<InMultiplayerGameManager>();
+            inventory = FindObjectOfType<Inventory>();
+        }
 
         if (inMultiplayerGameManager.playerOnEnable)
         {

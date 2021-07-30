@@ -46,10 +46,9 @@ public class PlayerController : NetworkBehaviour
 
         characterController = GetComponent<CharacterController>();
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (!IsLocalPlayer) { return; }
-
         //Movement
         Move(movementInput);
 

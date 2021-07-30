@@ -7,9 +7,8 @@ public class SpawnPlayer : MonoBehaviour
 
     void Start()
     {
-        ulong id = NetworkManager.Singleton.LocalClientId;
-
-        networkPlayerSpawner.SpawnPlayerServerRpc(id);
+        //NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
     }
+    
 
 }
