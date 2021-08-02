@@ -72,11 +72,10 @@ public class InventoryItemBase : NetworkBehaviour
     #region OnPickup
 
     [ServerRpc(RequireOwnership = false)]
-    public virtual void OnPickupServerRpc()
+    public virtual void OnPickupServerRpc(ulong netId)
     {
         //Debug.Log("Client wants to pickup object");
 
-        ulong netId = NetworkManager.Singleton.LocalClientId;
         gameObject.GetComponent<NetworkObject>().ChangeOwnership(netId);
         ulong itemNetId = gameObject.GetComponent<NetworkObject>().NetworkObjectId;
 
@@ -89,8 +88,13 @@ public class InventoryItemBase : NetworkBehaviour
         //Debug.Log("Client is pickup");
         NetworkObject netObj = NetworkSpawnManager.SpawnedObjects[itemNetId];
 
+        Debug.Log(netObj.IsOwner + " aici ");
+
+        Destroy(netObj.gameObject.GetComponent<Collider>());
         Destroy(netObj.gameObject.GetComponent<Rigidbody>());
         netObj.gameObject.SetActive(false);
+
+        //change location
 
     }
 

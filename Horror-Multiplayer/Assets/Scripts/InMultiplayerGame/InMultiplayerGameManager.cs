@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class InMultiplayerGameManager : MonoBehaviour
 {
+    public static InMultiplayerGameManager instance;
+
     [SerializeField] GameObject tabPanel;
     [SerializeField] GameObject infoMenuPanel;
 
@@ -21,6 +23,15 @@ public class InMultiplayerGameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         inputActions = new PlayerControllerAction();
         inputActions.Enable();
 
@@ -30,6 +41,9 @@ public class InMultiplayerGameManager : MonoBehaviour
 
         var chatbinding = inputActions.Menu.Chat.GetBindingDisplayString();
         PlayerPrefs.SetString("chatbinding", chatbinding);
+
+        var voiceChatbinding = inputActions.Player.PushToTalk.GetBindingDisplayString();
+        PlayerPrefs.SetString("voicechatbinding", voiceChatbinding);
     }
     private void Start()
     {
@@ -37,6 +51,7 @@ public class InMultiplayerGameManager : MonoBehaviour
 
         inputActions.Menu.TabMenu.performed += _ => TabPanel();
         inputActions.Menu.Chat.performed += _ => steamChat.ChatButton();
+
 
         string currentIDIn = PlayerPrefs.GetString("current_lobbyID");
         current_lobbyID = Convert.ToUInt64(currentIDIn);
@@ -98,5 +113,9 @@ public class InMultiplayerGameManager : MonoBehaviour
 
         Debug.Log("You're not in the lobby anymore!");
 
+    }
+    protected virtual void OnApplicationQuit()
+    {
+        LeaveLobby();
     }
 }

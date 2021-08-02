@@ -32,7 +32,6 @@ public class PlayerController : NetworkBehaviour
         {
             var renderColor = GetComponentInChildren<Renderer>();
             renderColor.material.SetColor("_Color", Color.blue);
-
         }
         else
         {

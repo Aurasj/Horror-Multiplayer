@@ -2,7 +2,7 @@ using Steamworks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class SteamChat : MonoBehaviour
 {
@@ -15,9 +15,9 @@ public class SteamChat : MonoBehaviour
     bool isChatting = false;
     string chatInput = "";
     string chatBinding;
+    string voiceChatBinding;
 
     List<ChatMessage> chatMessages = new List<ChatMessage>();
-
 
     [System.Serializable]
     public class ChatMessage
@@ -36,6 +36,7 @@ public class SteamChat : MonoBehaviour
         current_lobbyID = Convert.ToUInt64(PlayerPrefs.GetString("current_lobbyID"));
 
         chatBinding = PlayerPrefs.GetString("chatbinding");
+        voiceChatBinding = PlayerPrefs.GetString("voicechatbinding");
     }
 
     void Update()
@@ -65,7 +66,7 @@ public class SteamChat : MonoBehaviour
     {
         if (!isChatting)
         {
-            GUI.Label(new Rect(5, Screen.height - 25, 200, 25), "'" + chatBinding + "' " + "to chat");
+            GUI.Label(new Rect(5, Screen.height - 25, 200, 25), "'" + chatBinding + "' " + "to chat " + "|" + " '" + voiceChatBinding + "' " + "to voice");
         }
         else
         {

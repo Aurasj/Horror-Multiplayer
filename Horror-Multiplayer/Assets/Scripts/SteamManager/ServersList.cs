@@ -376,6 +376,9 @@ public class ServersList : MonoBehaviour
         }
         Debug.Log("Destroyed all players Info");
     }
-
+    protected virtual void OnApplicationQuit()
+    {
+        ButtonLeave();
+    }
 
 }

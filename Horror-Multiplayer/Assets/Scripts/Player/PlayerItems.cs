@@ -2,44 +2,50 @@ using MLAPI;
 using MLAPI.Messaging;
 using MLAPI.Spawning;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerItems : NetworkBehaviour
 {
-    [SerializeField] private GameObject hand;
+    [SerializeField] private Transform hand;
+    private GameObject currentItem;
 
     private InventoryItemBase mCurrentItem = null;
-    Inventory inventory;
 
     public override void NetworkStart()
     {
         base.NetworkStart();
 
-        if(!IsLocalPlayer) { return; }
-
+        Invoke("AfterStart", 0.5f);
     }
 
-    private void Update()
+    private void AfterStart()
     {
-        if (!IsLocalPlayer) { return; }
-
-        //nu s bine astea aici ******************
-        if (!inventory)
-        {
-            inventory = FindObjectOfType<Inventory>();
-
-            inventory.ItemUsed += Inventory_ItemUsed;
-            inventory.ItemRemoved += Inventory_ItemRemoved;
-        }
+        Inventory.instance.ItemUsed += Inventory_ItemUsed;
+        Inventory.instance.ItemRemoved += Inventory_ItemRemoved;
     }
 
     #region DropItem
 
+    public void DropCurrent(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (!IsLocalPlayer) { return; }
+
+            DropCurrentServerRpc();
+        }
+    }
+
     [ServerRpc(RequireOwnership = false)]
-    public void DropCurrentServerRpc()
+    private void DropCurrentServerRpc()
     {
         //Debug.Log("Client wats to drop the object");
-        if (!IsLocalPlayer) { return; }
-        DropCurrentClientRpc();
+        if (currentItem)
+        {
+            currentItem.GetComponent<NetworkObject>().RemoveOwnership();
+
+            DropCurrentClientRpc();
+        }
     }
 
     [ClientRpc]
@@ -47,26 +53,23 @@ public class PlayerItems : NetworkBehaviour
     {
         //Debug.Log("Client drop the object"); ;
 
-        if (mCurrentItem != null)
+        //TODO animation
+
+        Inventory.instance.RemoveItem(mCurrentItem);
+
+        currentItem.SetActive(true);
+        currentItem.transform.parent = null;
+
+        BoxCollider boxCol = currentItem.AddComponent<BoxCollider>();
+        Rigidbody rbItem = currentItem.AddComponent<Rigidbody>();
+        if (rbItem != null)
         {
-            //TODO animation
+            rbItem.AddForce(transform.forward * 10f, ForceMode.Impulse);
 
-            GameObject goItem = (mCurrentItem as MonoBehaviour).gameObject;
-
-            inventory.RemoveItem(mCurrentItem);
-
-            goItem.SetActive(true);
-            goItem.transform.parent = null;
-            goItem.GetComponent<NetworkObject>().RemoveOwnership();
-
-            Rigidbody rbItem = goItem.AddComponent<Rigidbody>();
-            if (rbItem != null)
-            {
-                rbItem.AddForce(transform.forward * 10f, ForceMode.Impulse);
-
-                Invoke("DoDropItemClientRpc", 0.25f);
-            }
+            Invoke("DoDropItemClientRpc", 0.25f);
         }
+
+        currentItem = null;
     }
 
     [ClientRpc]
@@ -77,6 +80,9 @@ public class PlayerItems : NetworkBehaviour
             //Debug.Log("Object-rb destroyed");
             Destroy((mCurrentItem as MonoBehaviour).GetComponent<Rigidbody>());
 
+            Debug.Log("ceva");
+
+
             mCurrentItem = null;
         }
     }
@@ -85,14 +91,10 @@ public class PlayerItems : NetworkBehaviour
     {
         InventoryItemBase item = e.Item;
 
-        GameObject goItem = (item as MonoBehaviour).gameObject;
-        // goItem.SetActive(true);
-        //goItem.transform.parent = null;
+        currentItem = (item as MonoBehaviour).gameObject;
 
         if (item == mCurrentItem)
             mCurrentItem = null;
-
-        Debug.Log(goItem.transform.parent);
     }
 
     #endregion
@@ -102,6 +104,9 @@ public class PlayerItems : NetworkBehaviour
     private void Inventory_ItemUsed(object sender, InventoryEventArgs e)
     {
         if (!IsLocalPlayer) { return; }
+
+        Debug.Log("pickup");
+
         if (mCurrentItem != null)
         {
             SetItemActive(mCurrentItem, false);
@@ -127,6 +132,10 @@ public class PlayerItems : NetworkBehaviour
         //Debug.Log("Client wants to use object");
 
         SetItemActiveClientRpc(itemNetId, active);
+
+        NetworkObject netObj = NetworkSpawnManager.SpawnedObjects[itemNetId];
+
+        currentItem = netObj.gameObject;
     }
 
     [ClientRpc]
@@ -136,10 +145,8 @@ public class PlayerItems : NetworkBehaviour
 
         NetworkObject netObj = NetworkSpawnManager.SpawnedObjects[itemNetId];
 
-        //netObj.transform.parent = active ? hand.transform : null;
         netObj.transform.position = hand.transform.position;
-        netObj.transform.SetParent(hand.transform);
-
+        netObj.transform.SetParent(hand);
         netObj.gameObject.SetActive(active);
     }
 

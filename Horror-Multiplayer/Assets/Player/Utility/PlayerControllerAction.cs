@@ -76,6 +76,14 @@ public partial class @PlayerControllerAction : IInputActionCollection2, IDisposa
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""DropItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d853ddf-33aa-43d5-b158-a482795c12e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""OkAnimation"",
                     ""type"": ""Button"",
                     ""id"": ""d81c2040-3000-4137-b66c-65e18c7df493"",
@@ -84,9 +92,9 @@ public partial class @PlayerControllerAction : IInputActionCollection2, IDisposa
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""DropItem"",
+                    ""name"": ""PushToTalk"",
                     ""type"": ""Button"",
-                    ""id"": ""9d853ddf-33aa-43d5-b158-a482795c12e4"",
+                    ""id"": ""e9224749-8253-40eb-90fe-389ce34ab188"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -337,17 +345,6 @@ public partial class @PlayerControllerAction : IInputActionCollection2, IDisposa
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f0383906-a045-4608-9953-43451d659a6f"",
-                    ""path"": ""<Keyboard>/b"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""OkAnimation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""7ef1375a-f040-45f4-92b6-be3a3f830816"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -365,6 +362,28 @@ public partial class @PlayerControllerAction : IInputActionCollection2, IDisposa
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""DropItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0383906-a045-4608-9953-43451d659a6f"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""OkAnimation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d56112bd-a141-4964-97ea-6401dd2ef2dd"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""PushToTalk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -994,8 +1013,9 @@ public partial class @PlayerControllerAction : IInputActionCollection2, IDisposa
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_ItemPickup = m_Player.FindAction("ItemPickup", throwIfNotFound: true);
-        m_Player_OkAnimation = m_Player.FindAction("OkAnimation", throwIfNotFound: true);
         m_Player_DropItem = m_Player.FindAction("DropItem", throwIfNotFound: true);
+        m_Player_OkAnimation = m_Player.FindAction("OkAnimation", throwIfNotFound: true);
+        m_Player_PushToTalk = m_Player.FindAction("PushToTalk", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1077,8 +1097,9 @@ public partial class @PlayerControllerAction : IInputActionCollection2, IDisposa
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_ItemPickup;
-    private readonly InputAction m_Player_OkAnimation;
     private readonly InputAction m_Player_DropItem;
+    private readonly InputAction m_Player_OkAnimation;
+    private readonly InputAction m_Player_PushToTalk;
     public struct PlayerActions
     {
         private @PlayerControllerAction m_Wrapper;
@@ -1089,8 +1110,9 @@ public partial class @PlayerControllerAction : IInputActionCollection2, IDisposa
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @ItemPickup => m_Wrapper.m_Player_ItemPickup;
-        public InputAction @OkAnimation => m_Wrapper.m_Player_OkAnimation;
         public InputAction @DropItem => m_Wrapper.m_Player_DropItem;
+        public InputAction @OkAnimation => m_Wrapper.m_Player_OkAnimation;
+        public InputAction @PushToTalk => m_Wrapper.m_Player_PushToTalk;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1118,12 +1140,15 @@ public partial class @PlayerControllerAction : IInputActionCollection2, IDisposa
                 @ItemPickup.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemPickup;
                 @ItemPickup.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemPickup;
                 @ItemPickup.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemPickup;
-                @OkAnimation.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOkAnimation;
-                @OkAnimation.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOkAnimation;
-                @OkAnimation.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOkAnimation;
                 @DropItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropItem;
                 @DropItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropItem;
                 @DropItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropItem;
+                @OkAnimation.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOkAnimation;
+                @OkAnimation.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOkAnimation;
+                @OkAnimation.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOkAnimation;
+                @PushToTalk.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPushToTalk;
+                @PushToTalk.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPushToTalk;
+                @PushToTalk.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPushToTalk;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1146,12 +1171,15 @@ public partial class @PlayerControllerAction : IInputActionCollection2, IDisposa
                 @ItemPickup.started += instance.OnItemPickup;
                 @ItemPickup.performed += instance.OnItemPickup;
                 @ItemPickup.canceled += instance.OnItemPickup;
-                @OkAnimation.started += instance.OnOkAnimation;
-                @OkAnimation.performed += instance.OnOkAnimation;
-                @OkAnimation.canceled += instance.OnOkAnimation;
                 @DropItem.started += instance.OnDropItem;
                 @DropItem.performed += instance.OnDropItem;
                 @DropItem.canceled += instance.OnDropItem;
+                @OkAnimation.started += instance.OnOkAnimation;
+                @OkAnimation.performed += instance.OnOkAnimation;
+                @OkAnimation.canceled += instance.OnOkAnimation;
+                @PushToTalk.started += instance.OnPushToTalk;
+                @PushToTalk.performed += instance.OnPushToTalk;
+                @PushToTalk.canceled += instance.OnPushToTalk;
             }
         }
     }
@@ -1355,8 +1383,9 @@ public partial class @PlayerControllerAction : IInputActionCollection2, IDisposa
         void OnJump(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnItemPickup(InputAction.CallbackContext context);
-        void OnOkAnimation(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
+        void OnOkAnimation(InputAction.CallbackContext context);
+        void OnPushToTalk(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -71,7 +71,7 @@ public class CameraControllerSinglePlayer : MonoBehaviour
             if(item != null)
             {
                 inventory.AddItem(item);
-                item.OnPickupServerRpc();
+                //item.OnPickupServerRpc();
             }
         }
     }

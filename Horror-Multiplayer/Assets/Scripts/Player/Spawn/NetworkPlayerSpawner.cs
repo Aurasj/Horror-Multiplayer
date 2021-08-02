@@ -1,56 +1,58 @@
 using MLAPI;
-using MLAPI.Configuration;
-using MLAPI.Messaging;
 using UnityEngine;
 
-public class NetworkPlayerSpawner : MonoBehaviour
+public class NetworkPlayerSpawner : NetworkBehaviour
 {
-    [SerializeField] private NetworkPrefab playerPrefab = null;
+    [SerializeField] private NetworkObject playerPrefab = null;
     [SerializeField] private Transform[] spawnPoints;
-    void Start()
-    {
-        NetworkManager.Singleton.OnClientConnectedCallback += SpawnPlayerServerRpc;
+    private int index = 0;
 
-        if (NetworkManager.Singleton.IsHost)
+    private bool spawnAsPlayerObject = true;
+
+    private void OnEnable()
+    {
+        //NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+    }
+
+    private void OnDisable()
+    {
+        NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+    }
+
+    private void Start()
+    {
+        if (IsHost)
         {
-            SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
+            SpawnPlayer(OwnerClientId);
+        }
+
+        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+
+    }
+    private void OnClientConnected(ulong clientId)
+    {
+        if (IsServer)
+        {
+            SpawnPlayer(clientId);
         }
     }
 
-
-    private Transform GetSpawnPoint()
+    public void SpawnPlayer(ulong clientId)
     {
-        // Stop if there are no spawn points in the seen
-        if (spawnPoints.Length == 0) { return null; }
+        NetworkObject player = Instantiate(playerPrefab, spawnPoints[index].transform.position, spawnPoints[index].transform.rotation);
+        player.name = playerPrefab.name + "(" + clientId + ")";
 
-        // get number of players
-        if (NetworkManager.Singleton.IsHost)
+        if (spawnAsPlayerObject)
         {
-            return spawnPoints[0].transform;
+            player.SpawnAsPlayerObject(clientId);
+            Debug.Log("clientId = " + clientId);
         }
         else
         {
-            ulong id = NetworkManager.Singleton.LocalClientId;
-            int count = (int)(id - 1);
-            return spawnPoints[count].transform;
+            player.SpawnWithOwnership(clientId);
+            Debug.Log("clientId = " + clientId);
         }
+
+        index++;
     }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void SpawnPlayerServerRpc(ulong clientId)
-    {
-        if (!NetworkManager.Singleton.IsServer) { return; }
-
-        // Get Spawn.  Stop if there are no spawn points in the seen
-        Transform spawn = GetSpawnPoint();
-        if (spawn == null) { Debug.Log("No Spawn Points in Scene!"); return; }
-
-        // Spawn on Client
-        GameObject player = Instantiate(playerPrefab.Prefab, spawn.position, spawn.rotation);
-
-
-        Debug.Log("clientId = " + clientId);
-        player.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
-    }
-
 }

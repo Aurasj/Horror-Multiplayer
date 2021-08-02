@@ -15,10 +15,6 @@ public class CameraController : NetworkBehaviour
     float XRotation = 0f;
 
     [Space(10f)]
-    InMultiplayerGameManager inMultiplayerGameManager;
-
-    [Space(10f)]
-    Inventory inventory;
     public LayerMask avoidPlayer;
     private float objectPickupRange = 3;
 
@@ -34,18 +30,17 @@ public class CameraController : NetworkBehaviour
         {
             playerCamera.GetComponent<AudioListener>().enabled = false;
             playerCamera.GetComponent<Camera>().enabled = false;
-            //Debug.Log("!islocal");
         }
         else
         {
             AudioListener[] audioListener = FindObjectsOfType<AudioListener>();
             for (int i = 0; i < audioListener.Length; i++)
             {
-                DestroyImmediate(audioListener[i]);
+                //DestroyImmediate(audioListener[i]);
+                audioListener[i].enabled = false;
             }
-            //Debug.Log("islocal");
 
-            
+            playerCamera.GetComponent<AudioListener>().enabled = true;
         }
     }
 
@@ -53,16 +48,12 @@ public class CameraController : NetworkBehaviour
     {
         if (!IsLocalPlayer) { return; }
 
-        //nu s bine astea aici ******************
-        if (!inMultiplayerGameManager && !inventory)
+        if (InMultiplayerGameManager.instance)
         {
-            inMultiplayerGameManager = FindObjectOfType<InMultiplayerGameManager>();
-            inventory = FindObjectOfType<Inventory>();
-        }
-
-        if (inMultiplayerGameManager.playerOnEnable)
-        {
-            MoveCamera(mouseInput);
+            if (InMultiplayerGameManager.instance.playerOnEnable)
+            {
+                MoveCamera(mouseInput);
+            }
         }
     }
 
@@ -119,8 +110,8 @@ public class CameraController : NetworkBehaviour
                 {
                     if (!IsLocalPlayer) { return; }
 
-                    inventory.AddItem(item);
-                    item.OnPickupServerRpc();
+                    Inventory.instance.AddItem(item);
+                    item.OnPickupServerRpc(NetworkManager.Singleton.LocalClientId);
                 }
             }
         }

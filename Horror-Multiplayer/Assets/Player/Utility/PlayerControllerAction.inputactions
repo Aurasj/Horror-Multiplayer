@@ -54,6 +54,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "DropItem",
+                    "type": "Button",
+                    "id": "9d853ddf-33aa-43d5-b158-a482795c12e4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "OkAnimation",
                     "type": "Button",
                     "id": "d81c2040-3000-4137-b66c-65e18c7df493",
@@ -62,9 +70,9 @@
                     "interactions": ""
                 },
                 {
-                    "name": "DropItem",
+                    "name": "PushToTalk",
                     "type": "Button",
-                    "id": "9d853ddf-33aa-43d5-b158-a482795c12e4",
+                    "id": "e9224749-8253-40eb-90fe-389ce34ab188",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -315,17 +323,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f0383906-a045-4608-9953-43451d659a6f",
-                    "path": "<Keyboard>/b",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "OkAnimation",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "7ef1375a-f040-45f4-92b6-be3a3f830816",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -343,6 +340,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "DropItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0383906-a045-4608-9953-43451d659a6f",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "OkAnimation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d56112bd-a141-4964-97ea-6401dd2ef2dd",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "PushToTalk",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
