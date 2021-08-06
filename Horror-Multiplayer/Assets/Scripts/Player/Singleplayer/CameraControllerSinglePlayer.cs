@@ -1,78 +1,83 @@
-using MLAPI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraControllerSinglePlayer : MonoBehaviour
 {
-    [SerializeField] float sensitivityX = 8f;
-    [SerializeField] float sensitivityY = 0.5f;
+    [SerializeField] float sensitivityX = 20f;
+    [SerializeField] float sensitivityY = 0.3f;
     Vector2 mouseInput;
 
+    [Space(10f)]
     [SerializeField] Transform playerCamera;
-    [SerializeField] float xClamp = 85f;
+    [SerializeField] float xClamp = 60f;
     float XRotation = 0f;
 
-    Inventory inventory;
+    [Space(10f)]
     public LayerMask avoidPlayer;
     private float objectPickupRange = 3;
+
+    #region StartUpdate
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-
-        AudioListener[] audioListener = FindObjectsOfType<AudioListener>();
-        for (int i = 0; i < audioListener.Length; i++)
-        {
-
-            DestroyImmediate(audioListener[i]);
-        }
-
-        inventory = FindObjectOfType<Inventory>();
     }
 
     private void FixedUpdate()
     {
         MoveCamera(mouseInput);
     }
+
+    private void OnDisable()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    #endregion
+
+    #region CameraInput
+
     void MoveCamera(Vector2 mouse)
     {
         XRotation -= mouse.y * sensitivityY;
         XRotation = Mathf.Clamp(XRotation, -xClamp, xClamp);
+
         Vector3 targetRotation = transform.eulerAngles;
         targetRotation.x = XRotation;
+
         playerCamera.eulerAngles = targetRotation;
 
         transform.Rotate(Vector3.up, mouse.x * sensitivityX * Time.deltaTime);
-
-        /*float mouseX = mouse.x * sensitivityX * Time.deltaTime;
-        float mouseY = mouse.y * sensitivityY * Time.deltaTime;
-
-        XRotation -= mouseY;
-
-        XRotation = Mathf.Clamp(XRotation, -xClamp, xClamp);
-
-        playerCamera.transform.localRotation = Quaternion.Euler(XRotation, 0, 0);
-
-        transform.Rotate(Vector3.up * mouseX * 3);*/
     }
+
     public void MouseInput(InputAction.CallbackContext context)
     {
         mouseInput = context.ReadValue<Vector2>();
     }
 
-    public void RaycastPickup()
+    #endregion
+
+    #region Actions
+
+    public void RaycastPickup(InputAction.CallbackContext context)
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, objectPickupRange, avoidPlayer))
+        if (context.performed)
         {
-            InventoryItemBase item = hit.collider.GetComponent<InventoryItemBase>();
+            RaycastHit hit;
 
-            if(item != null)
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, objectPickupRange, avoidPlayer))
             {
-                inventory.AddItem(item);
-                //item.OnPickupServerRpc();
+                InventoryItemBase item = hit.collider.GetComponent<InventoryItemBase>();
+
+                if (item != null)
+                {
+                    //Inventory.instance.AddItem(item);
+                    //item.OnPickupServerRpc(NetworkManager.Singleton.LocalClientId);
+                    Debug.Log("Nu merge!");
+                }
             }
         }
     }
+
+    #endregion
 }
