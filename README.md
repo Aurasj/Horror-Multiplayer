@@ -37,8 +37,19 @@ This game uses **peer-to-peer (P2P) networking**, which means that players conne
 ## 🔧 Features
 
 - Multiplayer support via Steam P2P transport  
+- No server required — purely peer-to-peer  
 - Unity C# scripts for player movement, shooting & networking  
 - Basic scene and setup to test player vs player interaction  
+- **Settings Menu**:  
+  - Resolution selection  
+  - Graphics quality settings  
+  - Fullscreen toggle  
+  - VSync toggle  
+  - Shadows toggle  
+  - FPS display toggle  
+- **Rebinding controls** using Unity Input System  
+- **Inventory system** for in-game items (if implemented)  
+
 
 ---
 
