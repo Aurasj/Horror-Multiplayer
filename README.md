@@ -9,11 +9,6 @@ A prototype multiplayer shooter game using Steam P2P communication in Unity.
 This project is a multiplayer shooter prototype built with Unity that uses Steam P2P for networking.  
 It shows how to use Steam’s peer‑to‑peer API for players to connect and play together in a basic environment.
 
-**Note:** This was my **largest Unity project at the time**, with a lot of potential, but it was **never completed or fully polished**.  
-Over the years, I’ve created **many Unity projects and tests**, most of them with potential ideas and features, but **none were ever fully finished**.
-
-Visit [www.aagameri.com](http://www.aagameri.com) for more info.
-
 ---
 
 ## 📝 How P2P Works
