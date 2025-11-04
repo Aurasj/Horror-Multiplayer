@@ -56,7 +56,7 @@ git clone https://github.com/Aurasj/Horror‑Multiplayer
 ```
 2. Open the project in Unity (compatible version as per the project settings).
 3. Ensure your Steamworks SDK and P2P transport are configured properly.
-4. Open the sample scene and run the game — two players should be able to connect via Steam.
+4. Open the sample scene and run the game — two or more players should be able to connect via Steam.
 
 ---
 
